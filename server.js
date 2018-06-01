@@ -110,7 +110,12 @@ app.get('/api/exercise/log', (req, res) => {
     }
   }
   Exercise.find(queryParams, {_id: 0, __v: 0}, options ).then( (result) => {
-    res.send(result);
+    if(result.length === 0){
+      res.send("No results found.");
+    }
+    else {
+      res.send(result);
+    }
   }).catch( (err) => {
     res.send(err);
   });
